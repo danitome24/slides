@@ -35,4 +35,9 @@ Passos:
 ----
 
 ## Exempled'ús
+![1](images/1.png)
 
+---
+
+## Exempled'ús
+![2](images/2.png)
