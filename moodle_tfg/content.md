@@ -34,10 +34,45 @@ Passos:
 
 ----
 
-## Exempled'ús
+# Exemple d'ús
+
+---
+
 ![1](images/1.png)
 
 ---
 
-## Exempled'ús
 ![2](images/2.png)
+
+---
+
+![3](images/mockups/1.png)
+
+---
+
+![4](images/mockups/2.png)
+
+---
+
+![5](images/mockups/3.png)
+
+---
+
+![6](images/mockups/4.png)
+
+---
+
+![7](images/mockups/5.png)
+
+---
+
+![8](images/mockups/6.png)
+
+---
+
+![9](images/mockups/7.png)
+
+---
+
+![10](images/mockups/8.png)
+
