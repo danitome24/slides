@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>reveal.js</title>
+    <title>TgnDevs | Daniel Tomé Fernández</title>
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/black.css">
@@ -26,14 +26,63 @@
 <div class="reveal">
     <div class="slides">
         <section>
-            <h1>Reverse proxy con Docker</h1>
+            <h1>Reverse proxy with Docker</h1>
             <h3></h3>
             <p>
                 <br><br>
             </p>
             <small>Daniel Tomé Fernández | @danitome24 | SREd (URV)</small>
         </section>
-        <section>Slide 2</section>
+        <section>
+            <h1>Agenda</h1>
+            <ul>
+                <li>Context</li>
+                <li>Problem</li>
+                <li>Proposal solution</li>
+                <li>More...</li>
+            </ul>
+        </section>
+        <section>
+            <h1>Context</h1>
+            <ul>
+                <li>Multiple web apps.</li>
+                <li class="fragment">Dockerized on the same server.</li>
+            </ul>
+        </section>
+        <section>
+            <h1>Problem</h1>
+            <ul>
+                <li>Multiple ports/urls.</li>
+                <p><span style="color: red;" class="fragment">impossible to build in single server</span></p>
+                <p><span style="color: red;" class="fragment">difficult to maintain</span></p>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>Reverse proxy on front</h2>
+                <ul>
+                    <li>Type of proxy server.</li>
+                    <li>Intermediary for its associated clients to contact any external server.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Reverse proxy on front</h2>
+                <i class="fab fa-github">jwilder/nginx-proxy</i>
+                <img src="images/github-picture.png"/>
+            </section>
+            <section>
+                <h2>Reverse proxy on front</h2>
+                <ul>
+                    <li>jwilder/nginx-proxy: Simple nginx proxy.</li>
+                    <li>jwilder/docker-gen: Generate Nginx config files using Docker containers meta-data.</li>
+                </ul>
+                <img src="images/reverse-proxy.jpg">
+            </section>
+        </section>
+        <section>
+            <h2>Thank you!!</h2>
+            <h2 class="fragment">Questions?</h2>
+        </section>
     </div>
 </div>
 
