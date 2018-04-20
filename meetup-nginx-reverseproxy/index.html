@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>TgnDevs | Daniel Tomé Fernández</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="lib/css/fontawesome-all.min.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Reverse proxy with Docker</h1>
+            <h3></h3>
+            <p>
+                <br><br>
+            </p>
+            <small>Daniel Tomé Fernández | @danitome24 | SREd (URV)</small>
+        </section>
+        <section>
+            <h1>Agenda</h1>
+            <ul>
+                <li>Context</li>
+                <li>Problem</li>
+                <li>Proposal solution</li>
+                <li>More...</li>
+            </ul>
+        </section>
+        <section>
+            <h1>Context</h1>
+            <ul>
+                <li>Multiple web apps.</li>
+                <li class="fragment">Dockerized on the same server.</li>
+            </ul>
+        </section>
+        <section>
+            <h1>Problem</h1>
+            <ul>
+                <li>Multiple ports/urls.</li>
+                <p><span style="color: red;" class="fragment">impossible to build in single server</span></p>
+                <p><span style="color: red;" class="fragment">difficult to maintain</span></p>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>Reverse proxy on front</h2>
+                <ul>
+                    <li>Type of proxy server.</li>
+                    <li>Intermediary for its associated clients to contact any external server.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Reverse proxy on front</h2>
+                <i class="fab fa-github">jwilder/nginx-proxy</i>
+                <img src="images/github-picture.png"/>
+            </section>
+            <section>
+                <h2>Reverse proxy on front</h2>
+                <ul>
+                    <li>jwilder/nginx-proxy: Simple nginx proxy.</li>
+                    <li>jwilder/docker-gen: Generate Nginx config files using Docker containers meta-data.</li>
+                </ul>
+                <img src="images/reverse-proxy.jpg">
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Setup: Starter structure</h2>
+                <img src="images/tree.png">
+            </section>
+            <section>
+                <h2>Setup: docker-compose.yml</h2>
+                <pre><code>
+    version: '3'
+    services:
+      nginx-proxy:
+        image: nginx
+        container_name: nginx
+        restart: unless-stopped
+        ports:
+           - "80:80"
+        volumes:
+           - ./conf.d:/etc/nginx/conf.d
+      nginx-gen:
+        image: jwilder/docker-gen
+        command: -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+        container_name: nginx-gen
+        restart: unless-stopped
+        volumes:
+           - ./conf.d:/etc/nginx/conf.d
+           - ./vhost.d:/etc/nginx/vhost.d
+           - /var/run/docker.sock:/tmp/docker.sock:ro
+           - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <h2>Thank you!!</h2>
+            <h2 class="fragment">Questions?</h2>
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
