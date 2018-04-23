@@ -103,7 +103,17 @@
                     </ul>
                     <pre>
                         <code>
-                            <--!TODO -->
+    {{ if eq $https_method "redirect" }}
+    server {
+        server_name {{ $host }};
+        listen 80 {{ $default_server }};
+        {{ if $enable_ipv6 }}
+        listen [::]:80 {{ $default_server }};
+        {{ end }}
+        access_log /var/log/nginx/access.log vhost;
+        return 301 https://$host$request_uri;
+    }
+    {{ end }}
                         </code>
                     </pre>
                 </div>
