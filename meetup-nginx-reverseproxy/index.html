@@ -47,15 +47,23 @@
             <ul>
                 <li>Multiple web apps.</li>
                 <li class="fragment">Dockerized on the same server.</li>
+                <li class="fragment">Only using docker-compose</li>
+                <li class="fragment">Manual management (no kubernetes, no swarm)</li>
             </ul>
         </section>
         <section>
             <h1>Problem</h1>
             <ul>
-                <li>Multiple ports/urls.</li>
-                <p><span style="color: red;" class="fragment">impossible to build in single server</span></p>
-                <p><span style="color: red;" class="fragment">difficult to maintain</span></p>
+                <li>Multiple ports or urls.</li>
+                <p><span style="color: red;" class="fragment">Impossible to build in single server</span></p>
+                <p><span style="color: red;" class="fragment">Difficult to maintain</span></p>
+                <p><span style="color: red;" class="fragment">Difficult to manage</span></p>
+                <p><span style="color: red;" class="fragment">How to deal using HTTP and HTTPS?</span></p>
             </ul>
+        </section>
+        <section>
+            <h2>Proposed solution</h2>
+            <p><span style="color: green;">Reverse proxy</span> to de rescue!</p>
         </section>
         <section>
             <section>
@@ -63,6 +71,7 @@
                 <ul>
                     <li>Type of proxy server.</li>
                     <li>Intermediary for its associated clients to contact any external server.</li>
+                    <img src="images/reverse-proxy.jpg">
                 </ul>
             </section>
             <section>
@@ -76,7 +85,6 @@
                     <li>jwilder/nginx-proxy: Simple nginx proxy.</li>
                     <li>jwilder/docker-gen: Generate Nginx config files using Docker containers meta-data.</li>
                 </ul>
-                <img src="images/reverse-proxy.jpg">
             </section>
         </section>
         <section>
@@ -85,12 +93,15 @@
                 <img src="images/tree.png">
             </section>
             <section>
-                <h2>Setup: docker-compose.yml</h2>
+                <h2>Setup: docker-compose.yml 1/2</h2>
                 <img src="images/docker-compose.png"/>
             </section>
             <section>
-                <h2>Setup: docker-compose.yml</h2>
+                <h2>Setup: docker-compose.yml 2/2</h2>
                 <img src="images/docker-compose2.png"/>
+            </section>
+            <section>
+                <img src="images/magic-happen.jpg" alt=""/>
             </section>
             <section>
                 <h2>Setup: nginx.tmpl</h2>
@@ -128,8 +139,11 @@
         </section>
         <section>
             <section>
-                <h2>Advanced</h2>
+                <h2>Advanced 1/2</h2>
 
+            </section>
+            <section>
+                <h2>Advanced 2/2</h2>
             </section>
         </section>
         <section>
