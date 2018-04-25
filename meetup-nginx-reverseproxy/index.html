@@ -54,11 +54,11 @@
         <section>
             <h1>Problem</h1>
             <ul>
-                <li>Multiple ports or urls.</li>
-                <p><span style="color: red;" class="fragment">Impossible to build in single server</span></p>
+                <li>Docker containers are assigned random IPs / define IPs policy</li>
                 <p><span style="color: red;" class="fragment">Difficult to maintain</span></p>
-                <p><span style="color: red;" class="fragment">Difficult to manage</span></p>
-                <p><span style="color: red;" class="fragment">How to deal using HTTP and HTTPS?</span></p>
+                <li class="fragment">Only one container can bind port 80 at a time</li>
+                <p><span style="color: red;"
+                         class="fragment">Impossible to build multiple containers in single server</span></p>
             </ul>
         </section>
         <section>
@@ -71,8 +71,8 @@
                 <ul>
                     <li>Type of proxy server.</li>
                     <li>Intermediary for its associated clients to contact any external server.</li>
-                    <img src="images/reverse-proxy.jpg">
                 </ul>
+                <img src="images/reverse-proxy.jpg">
             </section>
             <section>
                 <h2>Reverse proxy on front</h2>
@@ -94,11 +94,35 @@
             </section>
             <section>
                 <h2>Setup: docker-compose.yml 1/2</h2>
-                <img src="images/docker-compose.png"/>
+                <pre><code class="yml">  nginx-proxy:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - /etc/nginx/conf.d/
+  dockergen:
+    image: jwilder/docker-gen
+    command: -notify-sighup nginx-proxy -watch
+         /etc/docker-gen/templates/nginx.tmpl
+         /etc/nginx/conf.d/default.conf
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl</code></pre>
+                <!--<img height="375" width="718" src="images/docker-compose.png"/>-->
             </section>
             <section>
                 <h2>Setup: docker-compose.yml 2/2</h2>
-                <img src="images/docker-compose2.png"/>
+                <pre><code class="yml">  whoami:
+    build: ./site1/
+    container_name: whoami
+    environment:
+      - VIRTUAL_HOST=whoami.local
+
+  php-app:
+    build: ./site2/
+    container_name: php-app
+    environment:
+      - VIRTUAL_HOST=php.local</code></pre>
             </section>
             <section>
                 <img src="images/magic-happen.jpg" alt=""/>
@@ -108,13 +132,10 @@
                 <div>
                     <ul>
                         <li>Template using in Go text/template</li>
-                        <li>Interacts with docker api</li>
-                        <li>Generate static config file from a template</li>
+                        <li>Interacts with docker api and Generate static config file from a template</li>
                         <li>Set to reload config each change on template</li>
                     </ul>
-                    <pre>
-                        <code>
-    {{ if eq $https_method "redirect" }}
+                    <pre><code class="go">{{ if eq $https_method "redirect" }}
     server {
         server_name {{ $host }};
         listen 80 {{ $default_server }};
@@ -124,9 +145,7 @@
         access_log /var/log/nginx/access.log vhost;
         return 301 https://$host$request_uri;
     }
-    {{ end }}
-                        </code>
-                    </pre>
+    {{ end }}</code></pre>
                 </div>
             </section>
             <section>
@@ -139,26 +158,39 @@
         </section>
         <section>
             <section>
-                <h2>Advanced 1/2</h2>
+                <h2>Advanced</h2>
+                <ul>
+                    <li>Create your own templates</li>
+                    <li>Combine it with let's encrypt</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Custom templates</h2>
+                <div>
+                <pre><code>server {
+    listen 80;
+    server_name localhost 10.100.1.1 default_server;
+    {{ range $srv, $conts := groupBy $ "Env.LOCATION_PATH" }}
 
+        {{ range $container := $conts }}
+            location /{{ $container.Env.LOCATION_PATH }}/ {
+                proxy_pass http://{{ $container.Name }}/;
+                proxy_redirect default;
+            }
+        {{ end }}
+    {{ end }}
+}</code></pre>
+                </div>
             </section>
             <section>
-                <h2>Advanced 2/2</h2>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>Extra</h2>
-                <img src="images/letsencrypt.png">
+                <h2>Using with let's encrypt</h2>
+                <img height="300" width="600" src="images/letsencrypt.png">
             </section>
             <section>
-                <h2>Extra: Setup</h2>
-                <pre>
-                    <code>
+                <h2>Using with let's encrypt</h2>
+                <pre><code>
     nginx-letsencrypt:
      image: jrcs/letsencrypt-nginx-proxy-companion
-     container_name: nginx-letsencrypt
-     restart: unless-stopped
      volumes:
        - ./conf.d:/etc/nginx/conf.d
        - ./certs:/etc/nginx/certs:rw
@@ -166,24 +198,26 @@
      environment:
        NGINX_DOCKER_GEN_CONTAINER: "nginx-gen"
        NGINX_PROXY_CONTAINER: "nginx"
-                    </code>
-                </pre>
+                </code></pre>
             </section>
             <section>
-                <h2>Extra: Usage</h2>
-                <pre>
-                    <code>
+                <h2>Using with let's encrypt</h2>
+                <pre><code>
     ...
+  environment:
     LETSENCRYPT_HOST=whoami.com
     LETSENCRYPT_EMAIL=who@whoami.com
     ...
-                    </code>
-                </pre>
+                </code></pre>
             </section>
         </section>
         <section>
             <h2>Thank you!!</h2>
-            <h2 class="fragment">Questions?</h2>
+            <h2>Questions?</h2>
+            <p>
+                <br><br>
+            </p>
+            <small>Daniel Tomé Fernández | @danitome24 | SREd (URV)</small>
         </section>
     </div>
 </div>
@@ -196,6 +230,9 @@
     // - https://github.com/hakimel/reveal.js#configuration
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
         dependencies: [
             {src: 'plugin/markdown/marked.js'},
             {src: 'plugin/markdown/markdown.js'},

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  slides:
+    container_name: slides
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+    ports:
+      - '3000:8000'
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
