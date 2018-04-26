@@ -54,7 +54,8 @@
         <section>
             <h1>Problem</h1>
             <ul>
-                <li>Docker containers are assigned random IPs / define IPs policy</li>
+                <li>Docker containers are assigned random ports</li>
+                <li class="fragment">Define ports policy</li>
                 <p><span style="color: red;" class="fragment">Difficult to maintain</span></p>
                 <li class="fragment">Only one container can bind port 80 at a time</li>
                 <p><span style="color: red;"
@@ -171,11 +172,10 @@
     listen 80;
     server_name localhost 10.100.1.1 default_server;
     {{ range $srv, $conts := groupBy $ "Env.LOCATION_PATH" }}
-
         {{ range $container := $conts }}
+            {{ $network := index $container.Networks 0 }}
             location /{{ $container.Env.LOCATION_PATH }}/ {
-                proxy_pass http://{{ $container.Name }}/;
-                proxy_redirect default;
+                proxy_pass {{ $network.IP }}:{{ $address.Port }}/;
             }
         {{ end }}
     {{ end }}
@@ -210,6 +210,14 @@
     ...
                 </code></pre>
             </section>
+        </section>
+        <section>
+            <h2>Conclusion</h2>
+            <ul>
+                <li>Multiple dockerized apps on same server</li>
+                <li style="color: red;">Difficult to manage</li>
+                <li style="color: green;">Reverse proxy</li>
+            </ul>
         </section>
         <section>
             <h2>Thank you!!</h2>
