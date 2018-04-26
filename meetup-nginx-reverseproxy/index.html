@@ -39,7 +39,7 @@
                 <li>Context</li>
                 <li>Problem</li>
                 <li>Proposal solution</li>
-                <li>More...</li>
+                <li>Advanced...</li>
             </ul>
         </section>
         <section>
@@ -169,16 +169,16 @@
                 <h2>Custom templates</h2>
                 <div>
                 <pre><code>server {
-    listen 80;
-    server_name localhost 10.100.1.1 default_server;
-    {{ range $srv, $conts := groupBy $ "Env.LOCATION_PATH" }}
-        {{ range $container := $conts }}
-            {{ $network := index $container.Networks 0 }}
-            location /{{ $container.Env.LOCATION_PATH }}/ {
-                proxy_pass {{ $network.IP }}:{{ $address.Port }}/;
-            }
-        {{ end }}
+  listen 80;
+  server_name localhost 10.100.1.1 default_server;
+  {{ range $srv, $conts := groupBy $ "Env.LOCATION_PATH" }}
+    {{ range $container := $conts }}
+       {{ $network := index $container.Networks 0 }}
+       location /{{ $container.Env.LOCATION_PATH }}/ {
+           proxy_pass {{ $network.IP }}:{{ $address.Port }}/;
+        }
     {{ end }}
+  {{ end }}
 }</code></pre>
                 </div>
             </section>
