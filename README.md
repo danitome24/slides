@@ -6,7 +6,7 @@ This project contains all slides I used to expose any project. Is built with rev
 
 * Reverse proxy with docker [see](https://danitome24.github.io/meetup-nginx-reverseproxy)
 * Gradebook plugin for Moodle [see](https://danitome24.github.io/moodle_tfg)
-* Ecommerce written in Ruby [see](https://danitome24.github.io/sce)
+* Ecommerce written in Ruby [see](https://danitome24.github.io/sceslides)
 
 ## Built With
 
