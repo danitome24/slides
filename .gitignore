@@ -14,3 +14,5 @@ meetup-nginx-reverseproxy/node_modules/
 .bundle
 _site
 Gemfile.lock
+
+_templates

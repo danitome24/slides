@@ -10,7 +10,9 @@
           <h2 class="nav-title">{{ site.title }}</h2>
         </a>
         <ul>
-          <li><a href="{{ '/about' | prepend: site.baseurl }}">About</a></li>
+          {% comment %}
+          <li><a href="{{ '/sobre-mi' | prepend: site.baseurl }}">Sobre mi</a></li>
+          {% endcomment %}
           <li><a href="{{ site.baseurl }}/">Posts</a></li>
         </ul>
       </div>
