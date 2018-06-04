@@ -9,3 +9,8 @@ log/*.log
 tmp/**
 meetup-nginx-reverseproxy/node_modules/
 .sass-cache
+
+*.gem
+.bundle
+_site
+Gemfile.lock
