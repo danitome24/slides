@@ -4,7 +4,7 @@ title: "Usando Mailhog Con Php y Docker"
 date: 2018-06-12T10:00:01-05:00
 ---
 
-Cuando desarrollamos una aplicación web, muchas veces tenemos la necesidad de enviar emails desde dicha app. En este post os voy a explicar como he solucionado dicha necesidad y como lo he hecho para una aplicación escrita en Php sobre una arquitectura Docker.
+Cuando desarrollamos una aplicación web, muchas veces tenemos la necesidad de enviar emails desde dicha app. En este post os voy a explicar como he solucionado esta necesidad y como lo he hecho para una aplicación escrita en Php sobre una arquitectura Docker.
 
 Mailhog es una herramienta de testing para envío de emails que nos permite usarlo como servidor de SMTP y visualizador UI para los correos salientes. Así pues, podemos testear todos los email que nuestra aplicación envía, sin necesidad de hacer el envío real.
 
@@ -71,7 +71,7 @@ Añadimos el servicio de la app web a nuestro `docker-compose.yml`
 
 y levantamos el servicio con `docker-compose up`. 
 
-Para probarlo solamente tenemos que acceder a http://localhost8000 y podremos ver el mensaje de que todo ha ido bien. Por otro lado, si visitamos la web de Mailhog veremos en nuestra bandeja de entrada el email registrado.
+Para probarlo solamente tenemos que acceder a `http://localhost:8000` y podremos ver el mensaje de que todo ha ido bien. Por otro lado, si visitamos la web de Mailhog veremos en nuestra bandeja de entrada el email registrado.
 
 
 Esto es todo, si tienes cualquier duda, no dudes en contactar. Dejo disponible el codigo que he usado en [github](https://github.com/danitome24/danitome24.github.io/examples/2018-06-12-mailhog).
