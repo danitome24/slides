@@ -77,3 +77,5 @@ Para probarlo solamente tenemos que acceder a `http://localhost:8000` y podremos
 
 
 Esto es todo, si tienes cualquier duda, no dudes en contactar. Dejo disponible el codigo que he usado en [github](https://github.com/danitome24/danitome24.github.io/examples/2018-06-12-mailhog).
+
+¡Hasta la próxima! #whololodevelopment
