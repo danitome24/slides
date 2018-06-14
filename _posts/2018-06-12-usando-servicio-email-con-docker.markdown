@@ -73,5 +73,7 @@ y levantamos el servicio con `docker-compose up`.
 
 Para probarlo solamente tenemos que acceder a `http://localhost:8000` y podremos ver el mensaje de que todo ha ido bien. Por otro lado, si visitamos la web de Mailhog veremos en nuestra bandeja de entrada el email registrado.
 
+![mailhog](../assets/mailhog.png)
+
 
 Esto es todo, si tienes cualquier duda, no dudes en contactar. Dejo disponible el codigo que he usado en [github](https://github.com/danitome24/danitome24.github.io/examples/2018-06-12-mailhog).
