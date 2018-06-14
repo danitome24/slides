@@ -6,7 +6,9 @@ date: 2018-06-12T10:00:01-05:00
 
 Cuando desarrollamos una aplicación web, muchas veces tenemos la necesidad de enviar emails desde dicha app. En este post os voy a explicar como he solucionado dicha necesidad y como lo he hecho para una aplicación escrita en Php sobre una arquitectura Docker.
 
-## QUE ES MAILHOG
+Mailhog es una herramienta de testing para envío de emails que nos permite usarlo como servidor de SMTP y visualizador UI para los correos salientes. Así pues, podemos testear todos los email que nuestra aplicación envía, sin necesidad de hacer el envío real.
+
+Ahora solo queda intalarlo y jugar.
 
 Partiré de una imagen Docker de la librería oficial (php:7.1-apache) y donde le añadiré el ssmtp y un par de ficheros de configuración. Así pues, el Dockerfile que tendremos será el siguiente:
 
