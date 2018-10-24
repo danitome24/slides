@@ -2,6 +2,9 @@
 layout: post
 title: Valoración Techne Forum 2018
 date: 2018-10-24T09:48:14-05:00
+author: danitome24
+summary: Valoración Techne Forum 2018
+image: ../assets/techne-all.jpg
 ---
 
 El pasado 20 de octubre se celebró en Reus, el primer evento de tecnología, emprendimiento e innovación organizado por los diferentes grupos tecnológicos del Camp de Tarragona, [Teche Forum](https://techneforum.com/). Es la primera vez (que yo sepa) que se hace un evento, con duración de un día entero, basado en conferencias de ámbito tecnológico por este territorio y la verdad, es que me sorprendió muy positivamente el buen nivel de los ponentes y organizadores.

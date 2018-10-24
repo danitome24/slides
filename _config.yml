@@ -2,12 +2,16 @@
 title:          Daniel Tomé | Blog
 baseurl:        ""
 url:            "https://danitome24.github.io"
+description:    "El blog personal de Daniel Tomé"
 
 # Author
 author:
   name:         Daniel Tomé Fernández
   url:          https://danitome24.githubpages.io
   email:        danieltomefer@gmail.com
+
+# Twitter
+twitter_username: danitome24
 
 # Build settings
 markdown:       kramdown
