@@ -9,7 +9,7 @@ Esta semana me ha tocado aplicar en el trabajo un concepto que ya conocía del D
 
 ### Usando tipos simples
 
-¿Cuantas veces programando, hemos creado un objeto que engloba atributos de tipos simples dentro? ¿Muchas verdad? Por ejemplo el siguiente código
+¿Cuántas veces programando, hemos creado un objeto que engloba atributos de tipos simples dentro? ¿Muchas verdad? Por ejemplo el siguiente código
 
 ```
 <?php
@@ -61,11 +61,101 @@ final class Person {
 
 ¡Perfecto! Vamos mejorando nuestro código y encapsulando lógica dentro de nuestro objeto persona. ¿Que pasaría ahora si desde negocio, nos dan una feature que añadir a nuestra aplicación y tenemos que añadir un objeto nuevo que sea llame cliente y tengamos que guardar su edad? 
 
-Llegado a este punto nos daríamos cuenta de que este objeto nuevo `Client` tendría el mismo atributo `$age` que nuestra clase actual `Person` con la misma lógica que ya hemos aplicado dentro de esta. Si volvieramos a "copipastear" el código de una clase a otra estaríamos rompiendo el principio DRY, cosa que no está bien. También nos daríamos cuenta de que la edad, parece que mide, cuantifica o describe algo. Aquí entonces, entra en el juego el concepto "Value Object" al rescate.
+Llegado a este punto nos daríamos cuenta de que este objeto nuevo `Client` tendría el mismo atributo `$age` que nuestra clase actual `Person` con la misma lógica que ya hemos aplicado dentro de esta. Si volviéramos a "copipastear" el código de una clase a otra estaríamos rompiendo el principio DRY, cosa que no está bien. También nos daríamos cuenta de que la edad, parece que mide, cuantifica o describe algo. Aquí entonces, entra en el juego el concepto "Value Object" al rescate.
 
 ### Value object
 
+Un value object es un objeto pequeño que se es distinguible por su valor y no tienen identificador. Estos objetos son iguales cuando el contenido de sus atributos son iguales.
+
+#### Características
+
+##### Inmutabilidad
+
+Dado que un value object se identifica por su valor, si modificaramos un VO, estaríamos cambiando su identidad y, por tanto, ese VO ya no sería el mismo que antes de modificarlo. También queremos prevenir los side-effects en los VO, es decir, que nuestro VO cambie en el tiempo y no sepamos por que. Por estas razones los VO se hacen inmutables y no se deben poder modificar una vez ya creados.
+
+Es cierto que se pueden crear métodos que cambien los valores de nuestro VO, en ese caso, se tendrá que crear un nuevo objeto y desechar el anterior.
+
+```
+final class Age {
+
+	//...
+
+	public function increaseAgeByYears(int $years) {
+		return new self($this->age() + $years);
+	}
+}
+```
+
+##### Igualdad
+
+Tal y como hemos comentado previamente, dos value object son iguales si y solo si los valores de los atributos son iguales. Para ello es muy común que los value objects tengan un método que evalúe esta igualdad tal que:
+
+```
+final class Name {
+
+	//...
+
+	public function equals(Name $name): bool {
+		return $this->name() === $name->name();
+	}
+}
+```
+
+##### Creación y validación
+
+Los value object siempre tienen que estar en un estado válido. Para ello a la hora de crear un nuevo objeto, le pasaremos los valores primitivos y obtendremos un value object válido. Si no cumple con los requisitos o los parámetros son incorrectos, el propio objeto no será creado y podemos lanzar una excepción para notificarlo. Se acostumbra a decir que los value objects deben ser creados en un "single atomic step".
+
+```
+final class Age {
+
+	private const MIN_AGE = 0;
+    private const MAX_AGE = 150;
+
+	private $age;
+
+	private function __construct(int $age) {
+        $this->age = $age;
+	}
+
+	public static function fromAge(int $age) {
+		$this->checkIsValidAge($age);
+		return new static($age);
+	}
+
+	public function age(): int
+    {
+        return $this->age;
+    }
+
+	private function checkIsValidAge(int $age)
+    {
+        if ($age < self::MIN_AGE || $age > self::MAX_AGE) {
+            throw new InvalidAgeException('Age ' . $age . ' is invalid');
+        }
+    }
+}
+```
+
+##### Encapsulación de lógica
+
+Al crear objetos para atributos primitivos tenemos la ventaja de poderle añadir lógica a estos objetos. Siguiendo el ejemplo anterior de la edad, podemos añadirle funcionalidades reutilizables sin tener que duplicar código.
+
+```
+final class Age {
+
+	//....
+	private const LEGAL_AGE = 18;
+
+	public function isAdult(): bool {
+		return $this->age() >= self::LEGAL_AGE; 
+	}
+}
+```
 
 
+## Referencias
 
-
+* https://leanpub.com/ddd-in-php
+* http://wiki.c2.com/?ValueObjectsShouldBeImmutable
+* https://martinfowler.com/bliki/ValueObject.html
+* https://en.wikipedia.org/wiki/Value_object
