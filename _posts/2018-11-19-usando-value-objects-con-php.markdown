@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Usando Value Objects con Php"
+date: 2018-11-19T16:14:57-06:00
 author: danitome24
 summary: Usando Value Objects con Php
 ---
 
 Esta semana me ha tocado aplicar en el trabajo un concepto que ya conocía del DDD, llamado Value Object. Los que hayáis trabajado con DDD quizás ya os suene este concepto y los que no, os invito a seguir leyendo para saber un poco más de que va y en que nos pueden ayudar los Value Objects.
 
-### Usando tipos simples
+# Usando tipos simples
 
 ¿Cuántas veces programando, hemos creado un objeto que engloba atributos de tipos simples dentro? ¿Muchas verdad? Por ejemplo el siguiente código
 
@@ -63,13 +64,13 @@ final class Person {
 
 Llegado a este punto nos daríamos cuenta de que este objeto nuevo `Client` tendría el mismo atributo `$age` que nuestra clase actual `Person` con la misma lógica que ya hemos aplicado dentro de esta. Si volviéramos a "copipastear" el código de una clase a otra estaríamos rompiendo el principio DRY, cosa que no está bien. También nos daríamos cuenta de que la edad, parece que mide, cuantifica o describe algo. Aquí entonces, entra en el juego el concepto "Value Object" al rescate.
 
-### Value object
+# Value object
 
 Un value object es un objeto pequeño que se es distinguible por su valor y no tienen identificador. Estos objetos son iguales cuando el contenido de sus atributos son iguales.
 
-#### Características
+## Características
 
-##### Inmutabilidad
+### Inmutabilidad
 
 Dado que un value object se identifica por su valor, si modificaramos un VO, estaríamos cambiando su identidad y, por tanto, ese VO ya no sería el mismo que antes de modificarlo. También queremos prevenir los side-effects en los VO, es decir, que nuestro VO cambie en el tiempo y no sepamos por que. Por estas razones los VO se hacen inmutables y no se deben poder modificar una vez ya creados.
 
@@ -86,7 +87,7 @@ final class Age {
 }
 ```
 
-##### Igualdad
+### Igualdad
 
 Tal y como hemos comentado previamente, dos value object son iguales si y solo si los valores de los atributos son iguales. Para ello es muy común que los value objects tengan un método que evalúe esta igualdad tal que:
 
@@ -101,7 +102,7 @@ final class Name {
 }
 ```
 
-##### Creación y validación
+### Creación y validación
 
 Los value object siempre tienen que estar en un estado válido. Para ello a la hora de crear un nuevo objeto, le pasaremos los valores primitivos y obtendremos un value object válido. Si no cumple con los requisitos o los parámetros son incorrectos, el propio objeto no será creado y podemos lanzar una excepción para notificarlo. Se acostumbra a decir que los value objects deben ser creados en un "single atomic step".
 
@@ -136,7 +137,7 @@ final class Age {
 }
 ```
 
-##### Encapsulación de lógica
+### Encapsulación de lógica
 
 Al crear objetos para atributos primitivos tenemos la ventaja de poderle añadir lógica a estos objetos. Siguiendo el ejemplo anterior de la edad, podemos añadirle funcionalidades reutilizables sin tener que duplicar código.
 
