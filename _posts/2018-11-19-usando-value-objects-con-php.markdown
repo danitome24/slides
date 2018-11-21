@@ -17,20 +17,22 @@ Esta semana me ha tocado aplicar en el trabajo un concepto que ya conocía del D
 
 final class Person {
 
-	public $name;
+    public $name;
 
-	public $age;
+    public $age;
 
-	public function __construct ($name, $age) {
-		$this->name = $name;
-		$this->age = $age;
-	}
+    public function __construct ($name, $age) {
+        $this->name = $name;
+        $this->age = $age;
+    }
 }
 ```
 
 Este objeto persona, lo instanciaríamos de la siguiente forma:
 
 ```
+<?php
+
 $person = new Person("Perico", 15);
 ```
 
@@ -41,36 +43,73 @@ Todo bien hasta aquí, ¿verdad?. Como podemos ver, aquí no estamos teniendo co
 
 final class Person {
 
-	public $name;
+    public $name;
 
-	public $age;
+    public $age;
 
-	public function __construct ($name, int $age) {
-		$this->name = $name;
-		$this->age = $age;
-	}
+    public function __construct ($name, int $age) {
+        $this->name = $name;
+        $this->age = $age;
+    }
 
-	private function changeAge(int $age) {
-		if ($age <= 0) {
-			throw new NotValidAgeException();
-		}
+    private function changeAge(int $age) {
+        if ($age <= 0) {
+            throw new NotValidAgeException();
+        }
 
-		$this->age = $age;
-	}
+        $this->age = $age;
+    }
 }
 ```
 
 ¡Perfecto! Vamos mejorando nuestro código y encapsulando lógica dentro de nuestro objeto persona. Ahora bien, lanzo un par de preguntas:
-* ¿Es responsabilidad del objeto `Person` validar si una edad es valida o no?
-* ¿Que pasaría ahora si desde negocio, nos dan una feature que añadir a nuestra aplicación y tenemos que añadir un objeto nuevo que sea llame `Client` y tengamos que guardar su edad? 
+* ¿Es responsabilidad del objeto `Person` validar si una edad es válida o no?
+* ¿Que pasaría ahora si desde negocio, nos piden añadir una feature a nuestra aplicación y tenemos que añadir un objeto nuevo que sea llame `Client` y debamos que guardar su edad? 
 
-Llegado a este punto nos daríamos cuenta de que este objeto nuevo `Person` tendría el mismo atributo `$age` que nuestra clase actual `Person` con la misma lógica que ya hemos aplicado dentro de esta. Si volviéramos a "copipastear" el código de una clase a otra estaríamos rompiendo el principio DRY, cosa que no está bien. También nos daríamos cuenta de que la edad podría ser un concepto por si solo ya que mide, cuantifica o describe algo. Podríamos hablar de la edad como un objeto por si solo. Aquí entonces, entra en el juego el concepto "Value Object" al rescate.
+Llegado a este punto nos daríamos cuenta de que este objeto nuevo `Person` tendría el mismo atributo `$age` que nuestra clase actual `Person` con la misma lógica que ya hemos aplicado dentro de esta. Si volviéramos a "copipastear" el código de una clase a otra estaríamos rompiendo el principio DRY, cosa que no está bien. 
+
+También nos daríamos cuenta de que la edad podría ser un concepto por si solo ya que mide, cuantifica o describe algo. Podríamos hablar de la edad como un objeto por si mismo. Aquí entonces, entra en el juego el concepto "Value Object" al rescate.
 
 # Value object
 
-Un value object es un objeto pequeño que es distinguible por su valor y no tienen identificador. Estos objetos son iguales cuando el contenido de sus atributos son iguales.
+Un value object es un objeto pequeño que es distinguible por su valor y no tienen identificador. Estos objetos son iguales cuando el contenido de sus atributos son iguales. En otras palabras más sencillas, los value object son objetos que engloban tipos simples (integer, string, float, etc).
 
 ## Características
+
+### Creación y validación
+
+Los value object siempre tienen que estar en un estado válido. Para ello a la hora de crear un nuevo objeto, le pasaremos los tipos simples y lo que obtendremos a cambio será un value object válido. Si no cumple con los requisitos o los parámetros son incorrectos, el propio objeto no será creado y lanzaremos una excepción para notificarlo. Se acostumbra a decir que los value objects deben ser creados en un "single atomic step".
+
+```
+<?php
+
+final class Age {
+
+    private const MIN_AGE = 0;
+    private const MAX_AGE = 150;
+
+    private $age;
+
+    private function __construct(int $age) {
+        $this->age = $age;
+    }
+
+    public static function fromAge(int $age) {
+        $this->checkIsValidAge($age);
+        return new static($age);
+    }
+
+    public function age(): int {
+        return $this->age;
+    }
+
+    private function checkIsValidAge(int $age): bool {
+        if ($age < self::MIN_AGE || $age > self::MAX_AGE) {
+            throw new InvalidAgeException('Age ' . $age . ' is invalid');
+        }
+    }
+}
+```
 
 ### Inmutabilidad
 
@@ -104,46 +143,13 @@ final class Name {
 }
 ```
 
-### Creación y validación
-
-Los value object siempre tienen que estar en un estado válido. Para ello a la hora de crear un nuevo objeto, le pasaremos los valores primitivos y lo que obtendremos a cambio será un value object válido. Si no cumple con los requisitos o los parámetros son incorrectos, el propio objeto no será creado y lanzaremos una excepción para notificarlo. Se acostumbra a decir que los value objects deben ser creados en un "single atomic step".
-
-```
-final class Age {
-
-	private const MIN_AGE = 0;
-    private const MAX_AGE = 150;
-
-	private $age;
-
-	private function __construct(int $age) {
-        $this->age = $age;
-	}
-
-	public static function fromAge(int $age) {
-		$this->checkIsValidAge($age);
-		return new static($age);
-	}
-
-	public function age(): int
-    {
-        return $this->age;
-    }
-
-	private function checkIsValidAge(int $age)
-    {
-        if ($age < self::MIN_AGE || $age > self::MAX_AGE) {
-            throw new InvalidAgeException('Age ' . $age . ' is invalid');
-        }
-    }
-}
-```
-
 ### Encapsulación de lógica
 
 Al crear objetos para atributos primitivos tenemos la ventaja de poderle añadir lógica a estos objetos. Siguiendo el ejemplo anterior de la edad, podemos añadirle funcionalidades reutilizables sin tener que duplicar código.
 
 ```
+<?php
+
 final class Age {
 
 	//....
