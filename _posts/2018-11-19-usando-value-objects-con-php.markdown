@@ -89,7 +89,7 @@ final class Age {
 
 ### Igualdad
 
-Tal y como hemos comentado previamente, dos value object son iguales si y solo si los valores de los atributos son iguales. Para ello es muy común que los value objects tengan un método que evalúe esta igualdad tal que:
+Como hemos comentado previamente, dos value object son iguales si y solo si los valores de los atributos son iguales. Para ello es muy común que los value objects tengan un método que evalúe esta igualdad tal que:
 
 ```
 final class Name {
