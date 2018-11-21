@@ -60,7 +60,9 @@ final class Person {
 }
 ```
 
-¡Perfecto! Vamos mejorando nuestro código y encapsulando lógica dentro de nuestro objeto persona. ¿Que pasaría ahora si desde negocio, nos dan una feature que añadir a nuestra aplicación y tenemos que añadir un objeto nuevo que sea llame cliente y tengamos que guardar su edad? 
+¡Perfecto! Vamos mejorando nuestro código y encapsulando lógica dentro de nuestro objeto persona. Ahora bien, lanzo un par de preguntas:
+* ¿Es responsabilidad del objeto `Person` validar si una edad es valida o no?
+* ¿Que pasaría ahora si desde negocio, nos dan una feature que añadir a nuestra aplicación y tenemos que añadir un objeto nuevo que sea llame `Client` y tengamos que guardar su edad? 
 
 Llegado a este punto nos daríamos cuenta de que este objeto nuevo `Person` tendría el mismo atributo `$age` que nuestra clase actual `Person` con la misma lógica que ya hemos aplicado dentro de esta. Si volviéramos a "copipastear" el código de una clase a otra estaríamos rompiendo el principio DRY, cosa que no está bien. También nos daríamos cuenta de que la edad, parece que mide, cuantifica o describe algo. Aquí entonces, entra en el juego el concepto "Value Object" al rescate.
 
