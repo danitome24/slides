@@ -6,7 +6,7 @@ author: danitome24
 summary: Usando Value Objects con Php
 ---
 
-Esta semana me ha tocado aplicar en el trabajo un concepto que ya conocía del DDD, llamado Value Object. Los que hayáis trabajado con DDD quizás ya os suene este concepto y los que no, os invito a seguir leyendo para saber un poco más de que va y en que nos pueden ayudar los Value Objects.
+Esta semana me ha tocado aplicar en el trabajo un concepto que ya conocía del DDD, llamado Value Object. Los que hayáis trabajado con DDD quizás ya os suene y los que no, os invito a seguir leyendo para saber un poco más de que va y en que nos pueden ayudar.
 
 # Usando tipos simples
 
