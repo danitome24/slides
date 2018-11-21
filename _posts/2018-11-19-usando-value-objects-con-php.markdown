@@ -104,7 +104,7 @@ final class Name {
 
 ### Creación y validación
 
-Los value object siempre tienen que estar en un estado válido. Para ello a la hora de crear un nuevo objeto, le pasaremos los valores primitivos y obtendremos un value object válido. Si no cumple con los requisitos o los parámetros son incorrectos, el propio objeto no será creado y podemos lanzar una excepción para notificarlo. Se acostumbra a decir que los value objects deben ser creados en un "single atomic step".
+Los value object siempre tienen que estar en un estado válido. Para ello a la hora de crear un nuevo objeto, le pasaremos los valores primitivos y lo que obtendremos a cambio será un value object válido. Si no cumple con los requisitos o los parámetros son incorrectos, el propio objeto no será creado y lanzaremos una excepción para notificarlo. Se acostumbra a decir que los value objects deben ser creados en un "single atomic step".
 
 ```
 final class Age {
