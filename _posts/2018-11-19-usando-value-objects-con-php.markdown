@@ -74,7 +74,7 @@ Un value object es un objeto pequeño que se es distinguible por su valor y no t
 
 Dado que un value object se identifica por su valor, si modificaramos un VO, estaríamos cambiando su identidad y, por tanto, ese VO ya no sería el mismo que antes de modificarlo. También queremos prevenir los side-effects en los VO, es decir, que nuestro VO cambie en el tiempo y no sepamos por que. Por estas razones los VO se hacen inmutables y no se deben poder modificar una vez ya creados.
 
-Es cierto que se pueden crear métodos que cambien los valores de nuestro VO, en ese caso, se tendrá que crear un nuevo objeto y desechar el anterior.
+En el caso de que se quiera crear métodos que cambien los valores de nuestro VO, se tendrá que crear un nuevo objeto y desechar el anterior. Tal que así:
 
 ```
 final class Age {
