@@ -66,7 +66,7 @@ Llegado a este punto nos daríamos cuenta de que este objeto nuevo `Client` tend
 
 # Value object
 
-Un value object es un objeto pequeño que se es distinguible por su valor y no tienen identificador. Estos objetos son iguales cuando el contenido de sus atributos son iguales.
+Un value object es un objeto pequeño que es distinguible por su valor y no tienen identificador. Estos objetos son iguales cuando el contenido de sus atributos son iguales.
 
 ## Características
 
