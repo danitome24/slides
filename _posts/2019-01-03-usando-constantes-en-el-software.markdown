@@ -169,12 +169,12 @@ final class PostStatus
 
     public static function fromPublished(): self
     {
-        return new self(self::PUBLISHED);
+        return new static(self::PUBLISHED);
     }
 
     public static function fromUnpublished(): self
     {
-        return new self(self::UNPUBLISHED);
+        return new static(self::UNPUBLISHED);
     }
 }
 ```
