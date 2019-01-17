@@ -63,7 +63,7 @@ final class Car {
 }
 ``` 
 
-Una vez aquí, desde negocio, nos dicen que nuestro coche tendrá dos restricciones en cuanto al valor de la velocidad. La primera restricción es que nuestro coche no solo tendrá velocidad positiva (nunca podrá ir a una velocidad menor que 0 km/h) y la segunda restricción es que nuestro coche no puede sobrepasar la velocidad de 100 km/h.
+Una vez aquí, desde negocio, nos dicen que nuestro coche tendrá dos restricciones en cuanto al valor de la velocidad. La primera restricción es que nuestro coche solo tendrá velocidad positiva (nunca podrá ir a una velocidad menor que 0 km/h) y la segunda restricción es que nuestro coche no puede sobrepasar la velocidad de 100 km/h.
 
 Para dar solución a estas nuevas restricciones podríamos simplemente modificar el código tal que así:
 
