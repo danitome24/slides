@@ -103,7 +103,7 @@ El código nuevo cumpliría satisfactóriamente con los requisitos, pero ¿qué 
 
 * Elevado coste de cambio: Si seguimos desarrollando código y usando el valor literal de 0 y 100 por el código, si algun día queremos cambiar alguno de estos valores, tendremos que revisar todo el código y modificar uno a uno cada entero. Un IDE nos puede ayudar a este cambio, pero igualmente el coste será elevado. 
 
-* Peligro de errores: Al usar literales por el código, esto puede llevar a errores o confusiones ya que cada desarrollador lo puede escribir de una forma diferente. Un ejemplo sería con los literales de tipo float, el mismo número PI puede ser escrito diferente por cada desarrollador. El primero podria escribirlo como `3,14159` y otro `3,1416` teniendo dos valores diferentes y que podrían dar resultados diferentes en operaciones iguales.
+* Peligro de errores: Al usar literales por el código, esto puede llevar a errores o confusiones ya que cada desarrollador lo puede escribir de una forma diferente. Un ejemplo sería con los literales de tipo float, el mismo número PI puede ser escrito diferente por cada desarrollador. El primero podría escribirlo como `3,14159` y otro `3,1416` teniendo dos valores diferentes y que podrían dar resultados diferentes en operaciones iguales.
 
 Para solventar estos problemillas podemos hacer uso de las constantes. Así quedaría nuestro código:
 
