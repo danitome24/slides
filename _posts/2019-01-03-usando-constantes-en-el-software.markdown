@@ -202,4 +202,4 @@ Car::MAX_SPEED_ALLOWED // Devuelve 100
 Car::MIN_SPEED // Lanza error
 Car::NAME // Lanza error
 ```
-
+Más info en la [web de php](http://php.net/manual/es/language.oop5.visibility.php#language.oop5.visiblity-constants)
