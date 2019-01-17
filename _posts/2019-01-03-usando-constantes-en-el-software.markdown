@@ -10,7 +10,7 @@ Una buena práctia en el desarrollo software es el uso de constantes y en este p
 
 ## ¿Que es una constante?
 
-Una constante, tal y como su nombre indica, es un valor que no varía durante el tiempo, es decir, solamente puede ser leído. Se diferencian de las variables ya que estas si que varian durante el tiempo. Las constantes una vez definidas no pueden ser modificadas y permanecerán con el valor inicial durante toda la ejecución.
+Una constante, tal y como su nombre indica, es un valor que no varía durante el tiempo, es decir, solamente puede ser leído. Se diferencian de las variables ya que estas sí que varían durante el tiempo. Las constantes una vez definidas no pueden ser modificadas y permanecerán con el valor inicial durante toda la ejecución.
 
 ## Ejemplo de constante
 
