@@ -6,7 +6,7 @@ author: danitome24
 summary: Usando Constantes en El Software
 ---
 
-Una buena práctia en el desarrollo software es el uso de constantes y en este post os voy a intentar dar mi punto de vista sobre como usarlas de un modo correcto y como nos pueden ayudar a escribir un código más limpio y reutilizable.
+Una buena práctica en el desarrollo software es el uso de constantes y en este post os voy a intentar dar mi punto de vista sobre como usarlas de un modo correcto y como nos pueden ayudar a escribir un código más limpio y reutilizable.
 
 ## ¿Que es una constante?
 
