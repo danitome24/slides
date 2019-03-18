@@ -10,7 +10,7 @@ summary: Refactoring Presentación De Facturini
 
 Facturini es una aplicación web sencilla que permite añadir, listar y modificar facturaciones. 
 Es un proyecto de código legacy en el cual voy a ir aplicando refactoring en diversas iteraciones e ir explicando paso 
-por paso como refactorizar el código de una app poco a poco sin tener que empezar de zero. El objetivo de este seguido de
+por paso como refactorizar el código de una app poco a poco sin tener que empezar de cero. El objetivo de este seguido de
 posts será ir viendo como podemos aplicar técnicas de refactoring para mejorar la calidad de nuestro código.
 
 La app es un proyecto escrito con php, mysql, html, Js y CSS donde todo está mezclado, no se hace uso de ningún Framework,
