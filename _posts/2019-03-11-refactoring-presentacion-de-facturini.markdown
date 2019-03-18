@@ -29,7 +29,7 @@ iremos viendo como ir refactorizándolas poco a poco mientras el usuario sigue t
 
 ## Código legacy
 
-El código de Facturini lo podemos visitar en [Github](https://github.com/danitome24/facturini-refactoring). A medida que  
+El código de Facturini lo podemos visitar en [Github](https://github.com/danitome24/facturini-refactoring). A medida que 
 vaya aplicando refactoring iré publicando nuevas versiones del código con cada post. Así, podremos ir viendo como va mejorando iteración 
 a iteración el proyecto. Un buen punto de partida es empezar por la versión `v0.1`, donde tenemos el código publicado, 
 listo para ser refactorizdo. 
