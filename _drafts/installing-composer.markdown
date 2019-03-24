@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Installing Composer"
+title: "Facturini (1): Installing Composer"
 date: 2019-03-18
 author: danitome24
 summary: Instalando composer
@@ -76,3 +76,10 @@ Usaremos el estándard de [PSR-4](https://www.php-fig.org/psr/psr-4/) al cual le
 Al indicar `autoload-dev` a composer, cuando deployemos el código en producción e instalemos las dependencias, le podemos indicar que no instale las dependencias del entorno de test con `composer install --no-dev`. Así quitándole carga al autoloader de composer. Siguiendo la misma filosofía de optimización de composer, añadimos la opción de "optimize-autoloader" para que estos ficheros que genera composer automáticamente, sean optimizados y preparados para un entorno de producción.
 
 Por último, añadiré la opción de "scripts" para añadir dos shortcuts que nos ayudarán en entornos de test. Estos scripts sencillamente sirven para crear el entorno `Docker` y pararlo. Creo que el tener este tipo de scripts documentados en el `composer.json` ayudan a que sea mucho más sencilla la interacción de varios desarrolladores en un único proyecto, ya que de un simple vistazo a la configuración, puedes ver que opciones disponibles hay.
+
+```json
+"scripts": {
+        "start-server": "docker-compose up -d",
+        "stop-server": "docker-compose stop"
+    }
+```
