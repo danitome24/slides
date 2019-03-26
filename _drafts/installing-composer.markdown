@@ -6,7 +6,7 @@ author: danitome24
 summary: Instalando composer
 ---
 
-## Por dónde empezamos
+## Por donde empezamos
 
 Ya habréis visto que el proyecto de Facturini tiene muchas carencias a nivel de código. Quizás, con tanto por hacer, no sabríamos por donde empezar. A la hora de refactorizar código a mi me gusta seguir los siguientes puntos:
 
