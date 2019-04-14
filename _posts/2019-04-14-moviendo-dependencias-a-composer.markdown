@@ -88,4 +88,3 @@ Con este cambio podremos instanciar de nuevo el creador de pdf tal que: `new Cez
 determinará que esta clase a instanciar, la encontrará en `vendor/rebuy/ezpdf/src/ezpdf/class.ezpdf.php`. Este cambio lo
 haremos en los ficheros `imprimir.php` e `imprimir_llistat.php` y una vez lo hayamos cambiado, ya podemos borrar de la 
 carpeta `includes/php-pdf` todos los ficheros que ya no se usarán.
-s
