@@ -6,8 +6,10 @@ author: danitome24
 summary: Moviendo las dependencias 
 ---
 
+Seguimos con el refactoring de Facturini, en este post veremos como mover las dependencias externas a otras librerías hacia Composer.  
+
 Una vez ya tenemos Composer instalado, vamos a mover aquellas dependencias que teníamos en la carpeta `includes` a 
-nuestro gesto de dependencias. Recordemos que tenemos una carpeta en `includes/php-pdf` que corresponde a una librería
+nuestro gestor de dependencias. Recordemos que tenemos una carpeta en `includes/php-pdf` que corresponde a una librería
 externa que nos permite crear ficheros pdf. En nuestro proyecto, se usa para imprimir una factura o un listado de ellas.
 
 Lo primero que haremos será buscar por [Packagist](https://packagist.org/) si existe esta librería. Para los que no lo 
@@ -22,8 +24,8 @@ instalación.
 
 Para añadir dependencias en Composer tenemos dos opciones:
 
-1. Modificar directamente el `composer.json`.
-1. Usar los comandos CLI de composer.
+1. Modificar directamente el `composer.json`y ejecutar un comando cli. 
+1. Usar directamente los comandos CLI de composer.
 
 Yo opto por la segunda opción ya que con un simple comando, Composer automáticamente me modificará el registro del fichero
 composer correspondiente y me instalará la dependencia. Entonces para ello tenemos que ejecutar:
@@ -45,7 +47,7 @@ Writing lock file
 Generating optimized autoload files
 ```
 
-Como podemos ver, Composer ha actualizado el fichero `composer.json`, instalado la dependencia que faltaba y regenerado
+Como podemos ver, Composer ha actualizado el fichero `composer.json, ha creado otro llamado `composer.lock` y ha instalado la dependencia que faltaba y regenerado
 los ficheros de autoloading.
 
 ## Migrando a las dependencias
