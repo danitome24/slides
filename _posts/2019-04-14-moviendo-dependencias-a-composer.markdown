@@ -47,7 +47,7 @@ Writing lock file
 Generating optimized autoload files
 ```
 
-Como podemos ver, Composer ha actualizado el fichero `composer.json, ha creado otro llamado `composer.lock` y ha instalado la dependencia que faltaba y regenerado
+Como podemos ver, Composer ha actualizado el fichero `composer.json`, ha creado otro llamado `composer.lock` y ha instalado la dependencia que faltaba y regenerado
 los ficheros de autoloading.
 
 ## Migrando a las dependencias
