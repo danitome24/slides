@@ -6,7 +6,8 @@ author: danitome24
 summary: Moviendo las dependencias 
 ---
 
-Seguimos con el refactoring de Facturini, en este post veremos como mover las dependencias externas a otras librerías hacia Composer.  
+Seguimos con el refactoring de Facturini, en este post veremos como mover las dependencias externas a otras librerías hacia Composer. 
+Lo recomendado cuando realizamos ejercicios de refactorización sobre un código es hacerlo teniendo tests que nos aseguren que aquello refactorizado sigue funcionado correctamente. Como podemos apreciar en el proyecto Facturini, no podemos testear nuestro legacy code, ya que no tenemos clases que podamos testear. Eso si, existen los test de aceptación (ya entraremos en detalles en posts posteriores) que nos permitirán testear lo que tenemos actualmente y poder empezar a meterle mano al código sin miedo. Antes de todo pero, me gustaría acabar con el tema de las dependencias y Composer.
 
 Una vez ya tenemos Composer instalado, vamos a mover aquellas dependencias que teníamos en la carpeta `includes` a 
 nuestro gestor de dependencias. Recordemos que tenemos una carpeta en `includes/php-pdf` que corresponde a una librería
