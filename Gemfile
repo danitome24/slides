@@ -3,4 +3,5 @@
 source "https://rubygems.org"
 gemspec
 
-gem 'octopress', '~> 3.0'
+gem 'octopress'
+gem 'jekyll-font-awesome-sass'

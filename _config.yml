@@ -21,6 +21,8 @@ sass:
   sass_dir:     _sass
   style:        compressed
 
+font-awesome:
+  assets: true
 # Gems
 plugins:
   - jekyll-paginate
