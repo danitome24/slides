@@ -21,9 +21,12 @@ sass:
   sass_dir:     _sass
   style:        compressed
 
+font-awesome:
+  assets: true
 # Gems
 plugins:
   - jekyll-paginate
+  - jekyll-seo-tag
   #- jemoji #Uncomment this to allow emoji in your post
 
 # Permalinks
