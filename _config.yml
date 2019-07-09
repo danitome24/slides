@@ -26,6 +26,7 @@ font-awesome:
 # Gems
 plugins:
   - jekyll-paginate
+  - jekyll-seo-tag
   #- jemoji #Uncomment this to allow emoji in your post
 
 # Permalinks
