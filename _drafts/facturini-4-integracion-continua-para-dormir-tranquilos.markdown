@@ -8,13 +8,13 @@ En esto post vamos a ver que es y como nos va a ayudar la integración continua 
 
 ## ¿Que es la CI?
 
-Integración continua (CI) es una práctica en la que los desarrolladores integran código en un mismo repositorio y por cada cambio que se haga (Merge/Pull request) se lanzarán una serie de test y/o procesos automáticos. Esta práctia permite siempre asegurar que cada cambio que se aplica en un repositorio, tenga que pasar los test definidos y que si estos no pasan, entonces no se puedan integrar los cambios. Así, aseguramos que todas las integraciones, no rompan lo que ya está escrito anteriormente.
+Integración continua (CI) es una práctica en la que los desarrolladores integran código en un mismo repositorio y por cada cambio que se haga (Merge/Pull request) se lanzarán una serie de test y/o procesos automáticos. Esta práctica permite siempre asegurar que cada cambio que se aplica en un repositorio, tenga que pasar los test definidos y que si estos no pasan, entonces no se puedan integrar los cambios. Así, aseguramos que todas las integraciones, no rompan lo que ya está escrito anteriormente.
 
 En nuestro caso la CI nos ayudará a que cuando hagamos un cambio en el código, aseguremos que lo anterior hecho siga funcionando correctamente y, que por error, no integremos cambios que rompan el correcto funcionamiento de nuestra aplicación.
 
 ## Gitlab-ci al rescate
 
-Herramientas de CI hay diversas muy buenas: Jenkins, Travis CI, Gitlab CI, Circle CI, etc. Todas ellas ofrecen un software que nos permite lanzar pipelines para testear nuestro código por cada push que hagamos a nuestro repositorio. Yo solamente he tenido experiencia con Travis CI y con Gitlab CI. La primera la he usado con la integración de Github y la segunda es la que uso actualmente en el trabajo. Personalmente, Gitlab CI es una muy buena herramienta si trabajas con Gitlab como software de desarrollo colaborativo. Se integra todo en la misma plataforma y tiene features muy pero que muy interesantes. Por lo tanto, como estoy acostumbrado a ella y tengo el repositorio en gitlab, me decanto por usar esta plataforma como tool de integración contínua.
+Herramientas de CI hay diversas muy buenas: Jenkins, Travis CI, Gitlab CI, Circle CI, etc. Todas ellas ofrecen un software que nos permite lanzar pipelines para testear nuestro código por cada push que hagamos a nuestro repositorio. Yo solamente he tenido experiencia con Travis CI y con Gitlab CI. La primera la he usado con la integración de Github y la segunda es la que uso actualmente en el trabajo. Personalmente, Gitlab CI es una muy buena herramienta si trabajas con Gitlab como software de desarrollo colaborativo. Se integra todo en la misma plataforma y tiene features muy pero que muy interesantes. Por lo tanto, como estoy acostumbrado a ella y tengo el repositorio en gitlab, me decanto por usar esta plataforma como tool de integración continua.
 
 ## Configuración
 
@@ -26,7 +26,7 @@ Para configurar gitlab-ci simplemente tienes que crear un fichero `.gitlab-ci.ym
 
 **Stages**: Nos permite ordenar los *Jobs* que queremos ejecutar en el orden que nosotros queramos. Un ejemplo clásico sería: 
 1. Preparación de dependencias.
-1. Ejecución de los tests.
+1. Ejecución de los test.
 1. Deploy en producción.
 
 Todos estos pasos serían diferentes *stages* y cada *job* está ligado a una de ellas. Los *Jobs* pertenecientes a un mismo *stage* se ejecutan en paralelo. Cuando el resultado de todos los *jobs* de un mismo *stage* sea correcto, se pasa al siguiente. En el caso de que haya algún problema en un stage, no se pasa al siguiente *stage*.
@@ -75,7 +75,7 @@ stages:
   - test
 ```
 
-Defino las *stages* que habrán en mi *Pipeline*. Por el momento tendremos dos, una para preparar e instalar las dependencias y otra para ejecutar los test necesarios.
+Defino las *stages* que habrá en mi *Pipeline*. Por el momento tendremos dos, una para preparar e instalar las dependencias y otra para ejecutar los test necesarios.
 
 ```yml
 services:
