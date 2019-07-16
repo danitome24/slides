@@ -14,11 +14,11 @@ En nuestro caso la CI nos ayudará a que cuando hagamos un cambio en el código,
 
 ## Gitlab-ci al rescate
 
-Herramientas de CI hay diversas muy buenas: Jenkins, Travis CI, Gitlab CI, Circle CI, etc. Todas ellas ofrecen un software que nos permite lanzar pipelines para testear nuestro código por cada push que hagamos a nuestro repositorio. Yo solamente he tenido experiencia con Travis CI y con Gitlab CI. La primera la he usado con la integración de Github y la segunda es la que uso actualmente en el trabajo. Personalmente, Gitlab CI es una muy buena herramienta si trabajas con Gitlab como software de desarrollo colaborativo. Se integra todo en la misma plataforma y tiene features muy pero que muy interesantes. Por lo tanto, como estoy acostumbrado a ella y tengo el repositorio en gitlab, me decanto por usar esta plataforma como tool de integración continua.
+Herramientas de CI hay diversas y muy buenas: Jenkins, Travis CI, Gitlab CI, Circle CI, etc. Todas ellas ofrecen un software que nos permite lanzar pipelines para testear nuestro código por cada push que hagamos a nuestro repositorio. Yo solamente he tenido experiencia con Travis CI y con Gitlab CI. La primera la he usado con la integración de Github y la segunda es la que uso actualmente en el trabajo. Personalmente, Gitlab CI es una muy buena herramienta si trabajas con Gitlab como software de desarrollo colaborativo. Se integra todo en la misma plataforma y tiene features muy pero que muy interesantes. Por lo tanto, como estoy acostumbrado a ella y tengo el repositorio en gitlab, me decanto por usar esta plataforma como tool de integración continua.
 
 ## Configuración
 
-Para configurar gitlab-ci simplemente tienes que crear un fichero `.gitlab-ci.yml` indicando los pasos que tendrá que ejecutar la CI por cada push que nosotros hagamos a nuestro repositorio. Antes pero vamos a poner los conceptos básicos que usa gitlab para tener un buen contexto.
+Para configurar gitlab-ci simplemente tienes que crear un fichero `.gitlab-ci.yml` indicando los pasos que tendrá que ejecutar la CI por cada push que nosotros hagamos a nuestro repositorio. Antes pero vamos a poner los conceptos básicos que usa gitlab para estar más contextualizados.
 
 **Pipeline**: Conjunto de *Jobs* que se ejecutaran para cada push. Engloba todos los pasos que ejecutará la CI por cada push que hagamos al repositorio.
 
@@ -29,7 +29,7 @@ Para configurar gitlab-ci simplemente tienes que crear un fichero `.gitlab-ci.ym
 1. Ejecución de los test.
 1. Deploy en producción.
 
-Todos estos pasos serían diferentes *stages* y cada *job* está ligado a una de ellas. Los *Jobs* pertenecientes a un mismo *stage* se ejecutan en paralelo. Cuando el resultado de todos los *jobs* de un mismo *stage* sea correcto, se pasa al siguiente. En el caso de que haya algún problema en un stage, no se pasa al siguiente *stage*.
+Todos estos pasos serían diferentes *stages* y cada *job* está ligado a una de ellas. Los *Jobs* pertenecientes a un mismo *stage* se ejecutan en paralelo. Cuando el resultado de todos los *jobs* de un mismo *stage* sea correcto, se pasa al siguiente. En el caso de que haya algún problema en un stage, no se pasa al siguiente *stage* y se detiene la ejecución de la *pipeline*.
 
 **Runners**: Son las "máquinas" encargadas de ejecutar los *jobs* físicamente, es decir, los runners son los encargados de ejecutar cada job y devolver a Gitlab el resultado obtenido.
 
@@ -82,7 +82,7 @@ services:
   - docker:dind
 ```
 
-Indicamos que usaré el servicio de docker dentro de la pipeline.
+Indicamos a Gitlab que usaré el servicio de *Docker* dentro de la pipeline.
 
 ```yml
 cache:
@@ -90,7 +90,7 @@ cache:
   paths:
     - vendor/
 ```
-La `cache` en gitlab-ci nos permite compartir aquello que queramos entre las `stages`. La instalación de las dependencias de Composer es algo que solamente necesitamos hacer una vez. Es una perdida de tiempo hacerlo por cada stage ya que sería repetir el proceso dos veces. Por lo tanto, lo defino como cache y este directorio `vendor/` se compartirá entre todas las *stages* de la CI.
+La `cache` en gitlab-ci nos permite compartir aquello que queramos entre las `stages`. La instalación de las dependencias de Composer es algo que solamente necesitamos hacer una vez. Es una perdida de tiempo hacerlo por cada stage ya que sería repetir el proceso X veces. Por lo tanto, lo defino como cache y este directorio `vendor/` se compartirá entre todas las *stages* de la CI.
 
 
 ```yml
@@ -101,7 +101,7 @@ build:
     - docker run --rm -v $(pwd):/app -w /app composer install
 ```
 
-El primer *job* consiste en usar la imagen de `docker:stable` e instalar las dependencias de composer con la imagen latest de composer. Una vez este *job* termine, ejecutará los *jobs* del siguiente *stage* (test).
+El primer *job* consiste en usar la imagen de `docker:stable` e instalar las dependencias de *Composer* con su imagen latest. Una vez este *job* termine, ejecutará los *jobs* del siguiente *stage* (test).
 
 ```yml
 test:behat:
@@ -117,7 +117,7 @@ test:behat:
     - docker-compose exec -T php-apache vendor/bin/behat --colors
 ```
 
-Último *job* el cual se encargará de levantar un nuevo entorno de pruebas con `docker-compose` y ejecutará los test behat. Uso la imagen `tiangolo/docker-with-compose` ya que me proporciona el servicio de `docker-compose` que necesito sin hacer falta de instalarlo a manubrio. Con la etiqueta `before_script` preparo lo necesario para tener un entorno bien levantado y en el `script` ejecuto los test *Behat* que me aseguraran el correcto funcionamiento de mi aplicación.
+Último *job* el cual se encargará de levantar un nuevo entorno de pruebas con el orquestrador `docker-compose` y ejecutará los test *Behat*. Uso la imagen `tiangolo/docker-with-compose` ya que me proporciona el servicio de `docker-compose` que necesito sin hacer falta de instalarlo. Con la etiqueta `before_script` preparo lo necesario para tener un nuevo entorno y en el `script` ejecuto los test *Behat* que me asegurarán el correcto funcionamiento de mi aplicación.
 
 ## Gitlab
 
@@ -125,7 +125,7 @@ Finalmente lo que veremos en la aplicación de Gitlab cuando hacemos un push ser
 
 ![gitlab-ci](../assets/ci-running.png)
 
-Podemos ver que la *Pipeline* se está ejecutando: la primera *stage* (build) ha ido correctamente y que aún le queda la segunda por ejecutar. Finalmente deberíamos ver que las *stages* han pasado correctamente y que ya podemos hacer `merge` de nuestros cambios con la seguridad de que todo ha ido bien.
+Podemos ver que la *Pipeline* se está ejecutando: la primera *stage* (build) ha sido satisfactoria y que aún le queda la segunda por ejecutar. Finalmente deberíamos ver que las *stages* han pasado correctamente y que ya podemos hacer `merge` de nuestros cambios con la seguridad de que todo sigue funcionando correctamente.
 
 ![gitlab-ci-ok](../assets/ci-ok.png)
 
