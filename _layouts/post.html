@@ -4,7 +4,7 @@ layout: default
 
 <div class="post">
   <div class="post-info">
-    <span>Written by</span>
+    <span>Escrito por</span>
     {% if page.author %}
         {{ page.author }}
     {% else %}
@@ -13,8 +13,28 @@ layout: default
 
     {% if page.date %}
       <br>
-      <span>on&nbsp;</span><time datetime="{{ page.date }}">{{ page.date | date: "%B %d, %Y" }}</time>
+      <span>a&nbsp;</span>
+      {% assign m = page.date | date: "%-m" %}
+      {{ page.date | date: "%-d" }}
+      de
+      {% case m %}
+        {% when '1' %}Enero
+        {% when '2' %}Febrero
+        {% when '3' %}Marzo
+        {% when '4' %}Abril
+        {% when '5' %}Mayo
+        {% when '6' %}Junio
+        {% when '7' %}Julio
+        {% when '8' %}Agosto
+        {% when '9' %}Septiembre
+        {% when '10' %}Octubre
+        {% when '11' %}Noviembre
+        {% when '12' %}Diciembre
+      {% endcase %}
+      {{ page.date | date: "%Y" }}
     {% endif %}
+    <br>
+    {% include read_time.html %}
   </div>
 
   <h1 class="post-title">{{ page.title }}</h1>
