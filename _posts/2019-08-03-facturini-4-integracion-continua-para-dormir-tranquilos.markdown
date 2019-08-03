@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Facturini (4): CI Para Dormir Tranquilos"
+date: 2019-08-03T12:39:01+02:00
 description: Añadimos CI para poder ir haciendo cambios y estar seguro que no hemos roto nada.
 ---
 
