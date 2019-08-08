@@ -91,7 +91,7 @@ cache:
   paths:
     - vendor/
 ```
-La `cache` en gitlab-ci nos permite compartir aquello que queramos entre las `stages`. La instalación de las dependencias de Composer es algo que solamente necesitamos hacer una vez. Es una perdida de tiempo hacerlo por cada stage ya que sería repetir el proceso X veces. Por lo tanto, lo defino como cache y este directorio `vendor/` se compartirá entre todas las *stages* de la CI.
+La `cache` en gitlab-ci nos permite compartir aquello que queramos entre las `pipelines`. La instalación de las dependencias de Composer es algo que solamente necesitamos hacer una vez. Es una perdida de tiempo hacerlo por cada stage ya que sería repetir el proceso X veces. Por lo tanto, lo defino como cache y este directorio `vendor/` se compartirá entre todas las *stages* de la CI.
 
 
 ```yml
