@@ -6,3 +6,4 @@ gemspec
 gem 'octopress'
 gem 'jekyll-font-awesome-sass'
 gem 'jekyll-seo-tag'
+gem 'jemoji'
