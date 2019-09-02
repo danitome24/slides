@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Facturini (5): Phinx el Gestor De Migraciones"
+date: 2019-09-02T16:53:22+02:00
 description: Phinx como gestor de migraciones
 ---
 
